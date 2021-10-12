@@ -1,15 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'; 
+import Header from './Components/Header/Header';
+import SimpleBottomNavigation from './Components/MainNav/MainNav';
+import MainNav from './Components/MainNav/MainNav';
 
 function App() {
   return (
-    <div className="App">
-     
-    </div>
-  );
+    <>
+      <Header />  
+      <div className="App">blabla</div>
+      {/* <SimpleBottomNavigation /> */}
+      <MainNav />
+    </>
+  ); 
 }
 
 export default App;
+ 
 
-
-// https://youtu.be/vxUfx4aM5d8?t=279
+// https://youtu.be/vxUfx4aM5d8?t=751
