@@ -2,9 +2,10 @@ import { makeStyles } from '@material-ui/core'
 import { Pagination } from '@mui/material' 
 import { ThemeProvider } from '@mui/private-theming'
 import "./CustomPagionation.css"
+import { createTheme } from '@mui/material/styles';
 
 
-const darkTheme = makeStyles({
+const darkTheme = createTheme({
     palette: {
         type: 'dark'
     }
@@ -29,7 +30,12 @@ const CustomPagination = ({setPage, numOfPages = 10 }) => {
             }}
         >
             <ThemeProvider theme={darkTheme}>
-               <Pagination count={numOfPages} onChange={(e) => handlePageChange(e.target.textContent)} />
+               <Pagination 
+                    count={numOfPages} 
+                    size="large" 
+                    color="primary" 
+                    onChange={(e) => handlePageChange(e.target.textContent)} 
+                />
             </ThemeProvider>
         </div>
     )

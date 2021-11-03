@@ -15,6 +15,8 @@ const Trending = () => {
     useEffect(() => {
         fetchTrending()
     }, [page]) 
+
+    
     return (
         <div>
           <span className="pageTitle">Trending</span>
