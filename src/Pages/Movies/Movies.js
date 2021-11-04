@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import CustomPagination from "../../Components/Pagination/CustomPagination";
+import Genres from "../../Components/SingleContent/Genres";
 import SingleContent from "../../Components/SingleContent/SingleContent";
 import '../Trending/Trending.css';
 
@@ -9,9 +10,11 @@ const Movies = () => {
     const [page, setPage] = useState(1);
     const [content, setContent] = useState([]);
     const [numOfPages, setNumOfPages] = useState(1);
+    const [selectedGenres, setSelectedGenres] = useState([]);
+    const [genres, setGenres] = useState([]);
 
     const fetchMovies =  async () => {
-        const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.asc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate&page=${page}`)
+        const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}`)
         // console.log(data);
         setContent(data.results);
     }
@@ -19,11 +22,19 @@ const Movies = () => {
 
     useEffect(() => {
         fetchMovies(); 
-    }, [])
+    }, [page])
 
     return (
         <div>
             <span className="pageTitle">Movies</span>
+            <Genres
+                type='movie'
+                selectedGenres={selectedGenres} 
+                setSelectedGenres={setSelectedGenres}
+                genres={genres}
+                setGenres={setGenres} 
+                setPage={setPage}
+            />
             <div className="trending"> 
               {
                 content && content.map((c) => 
@@ -38,8 +49,11 @@ const Movies = () => {
                     />)
               }
           </div>
-          <CustomPagination setPage={setPage} />
-        </div>
+          { numOfPages > 1 && (
+          <CustomPagination setPage={setPage} numOfPages={numOfPages}/>
+          )}
+        
+          </div>
     )
 }
 
